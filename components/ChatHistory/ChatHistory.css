@@ -1,0 +1,21 @@
+
+
+.chat-history {
+    border-radius: 10px;
+}
+
+
+.chat-history-custom {
+    border-radius: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .chat-history-custom {
+        display: none;
+
+    }
+
+}
+
+

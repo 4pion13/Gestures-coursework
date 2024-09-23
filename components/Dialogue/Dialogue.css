@@ -1,0 +1,32 @@
+
+
+.dialogue {
+    border-radius: 10px;
+}
+
+
+.dialogue-custom {
+    border-radius: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .dialogue-custom-container {
+        display: block;
+        justify-content: center;
+
+
+    }
+
+}
+
+
+@media (max-width: 768px) {
+    .dialogue-custom {
+        width: 100% !important;
+        margin: 0 auto;
+
+
+    }
+
+}
