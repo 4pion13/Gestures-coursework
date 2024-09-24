@@ -57,7 +57,7 @@ class FileUploadBtn {
             setTimeout(function(){
                 me.loadingStatus = 0;
                 me.updateBtn();
-                dialogue.render();
+                dialogue.render(data.file_url);
             }, 1000);
         })
         .catch((error) => {
