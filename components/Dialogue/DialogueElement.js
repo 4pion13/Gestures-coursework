@@ -45,7 +45,6 @@ class DialogueElement {
 
 
         document.getElementById('dialogueElement').innerHTML += htmlDialogue;
-
         }
 }
 

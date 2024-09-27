@@ -62,7 +62,8 @@ class FileUploadBtn {
             console.log('Success:', data);
             dialogueElement.render(data.file_url, data.message);
             this.updateBtn();
-
+            dialogue.chatScroll();
+            
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -93,6 +94,7 @@ class FileUploadBtn {
                 me.loadingStatus = 0;
                 me.updateBtn();
                 dialogueElement.render(data.file_url);
+                dialogue.chatScroll();
                 setTimeout(function(){
                     me.videoProcessing(data.file_id, data.file_url);
                 }, 2000);
@@ -122,7 +124,6 @@ class FileUploadBtn {
     render (){
         let htmlBtn = this.fileUploadBtnInner();
         let rootBtnDialogue = document.getElementById('btnDialogue');
-        console.log(rootBtnDialogue.innerHTML)
         rootBtnDialogue.innerHTML = htmlBtn;
     }
 

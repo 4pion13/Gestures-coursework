@@ -1,5 +1,15 @@
 class Dialogue{
+
+    chatScroll(){
+        setTimeout(function(){
+            let chat = document.getElementById('chat');
+            chat.scrollTop = chat.scrollHeight;
+        }, 1000);
+    }
+
+
     render(url){
+        this.chatScroll
         
         console.log(fileUploadBtn.processingStatus)
         
@@ -8,7 +18,7 @@ class Dialogue{
                 <div class="d-flex justify-content-center">
                     <h2>Диалог</h2>
                 </div>
-                <div style = "overflow-y: scroll; height: 85%; width: 100%">
+                <div id='chat' style = "overflow-y: scroll; height: 80%; width: 100%">
                     <div id="dialogueElement"><div>
                 </div>
                 <div id="btnDialogue"><div>
