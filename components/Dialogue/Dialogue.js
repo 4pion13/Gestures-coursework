@@ -16,7 +16,7 @@ class Dialogue{
         const html = `
             <div class = "w-100 h-100 bg-secondary-subtle chat-history shadow" style = "position:relative;">
                 <div class="d-flex justify-content-center">
-                    <h2>Диалог</h2>
+                    <h5 class="py-2 mb-0">Диалог</h5>
                 </div>
                 <div id='chat' style = "overflow-y: scroll; height: 80%; width: 100%">
                     <div id="dialogueElement"><div>
