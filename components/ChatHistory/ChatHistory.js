@@ -73,20 +73,34 @@ class ChatHistory {
     //     ROOT_CHAT_HISTORY.innerHTML = html;
     // }
 
-        render(){
-            
-            //<div type="button" onclick="chatHistory.requestChatHistory()">Кнопка<div></div>
+        render(loading){
             let htmlChat = '';
-            htmlChat += `
-            <div>
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5>Чаты</h5>
-                    <button type="button" class="btn border" onclick="chatModal.openModal()"><i class="fa-brands fa-rocketchat fa-regular" style="color: #ffffff;"></i></button>
+            if (loading) {
+                console.log('Загрузка чатов')
+                htmlChat = `
+                <div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>Чаты</h5>
+                    </div>
+                    <div class = "d-flex justify-content-center p-5">
+                        <div class="spinner-border spinner-color" role="status">
+                        </div>
+                    <div>
                 </div>
-            </div>
-    
-    
-            `
+                `
+
+            } else {
+                htmlChat = `
+                <div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5>Чаты</h5>
+                        <button type="button" class="btn border" onclick="chatModal.openModal()"><i class="fa-brands fa-rocketchat fa-regular" style="color: #ffffff;"></i></button>
+                    </div>
+                </div>
+                `
+            }
+            //<div type="button" onclick="chatHistory.requestChatHistory()">Кнопка<div></div>
+
     
             const html = `
                 <div class = "h-100 w-100 bg-secondary-subtle chat-history chat-history-custom shadow p-3">

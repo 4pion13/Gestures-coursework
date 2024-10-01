@@ -8,3 +8,16 @@ body {
     font-family: sans-serif;
     line-height: 1.7;
 }
+
+
+
+.dialogue::-webkit-scrollbar {
+    width: 5px;               /* ширина scrollbar */
+}
+
+.dialogue::-webkit-scrollbar-thumb {
+    background-color: rgba(229, 103, 23, 0.8);    /* цвет плашки */;
+    border-radius: 0px;       /* закругления плашки */
+    border: 0px solid rgba(229, 103, 23, 0.8);  /* padding вокруг плашки */
+}
+

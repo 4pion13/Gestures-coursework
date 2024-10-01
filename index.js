@@ -4,7 +4,16 @@ function render(){
     fileUploadBtn.render();
     dialogueElement.render();
 };
-spinner.render();
+
+
+function loading(){
+    chatHistory.render(true);
+    dialogue.render(true);
+}
+
+loading();
+//spinner.render();
+
 let CHATS = [];
 
 
@@ -16,7 +25,7 @@ fetch('http://localhost:8000/chat-history/')
         setTimeout(function(){
             spinner.rootClear();
             render();
-        }, 2000);
+        }, 1500);
     })
     .catch(error => {
         console.log(error);
