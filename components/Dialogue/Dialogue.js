@@ -4,7 +4,7 @@ class Dialogue{
         setTimeout(function(){
             let chat = document.getElementById('chat');
             chat.scrollTop = chat.scrollHeight;
-        }, 1000);
+        }, 100);
     }
 
 

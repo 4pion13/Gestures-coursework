@@ -1,0 +1,7 @@
+.spinner-container {
+    position: fixed;
+}
+
+.spinner-color {
+    color: rgba(229, 103, 23, 0.8);
+}
