@@ -42,12 +42,13 @@ class FileUploadBtn {
     videoProcessing(id){
         this.processingStatus = 1;
         this.updateBtn();
+        let chatId = localStorageUtil.getChatId()[0];
         fetch('http://localhost:8000/process/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({id}),
+            body: JSON.stringify({id, chatId}),
         })
         .then(response => {
             if (!response.ok) {

@@ -73,8 +73,8 @@ class ChatHistory {
     //     ROOT_CHAT_HISTORY.innerHTML = html;
     // }
 
-        getChatId(id){
-            console.log(id);
+        getChatId(id, index){
+            console.log(id, index);
             fetch('http://localhost:8000/chat-data/', {
                 method: 'POST',
                 headers: {
@@ -86,9 +86,12 @@ class ChatHistory {
                 .then(data => {
                     console.log('Success:', data.chat_data);
                     CHAT_DATA = data.chat_data;
-                    dialogue.render(false, id);
+                    dialogue.render(false, index);
                     fileUploadBtn.render();
                     dialogueElement.render();
+                    localStorageUtil.putChatId(id);
+                    dialogue.chatScroll();
+                    console.log(localStorageUtil.getChatId());
                     
                 })
                 .catch((error) => {
@@ -128,7 +131,7 @@ class ChatHistory {
                         console.log(el.id, index+1);
                         htmlChats += `
                             <div class="mb-1" style="padding-left: 5px; padding-right: 5px;">
-                                <button type="button" class="btn border col-12 d-flex justify-content-end" onclick="chatHistory.getChatId(${el.id})">
+                                <button type="button" class="btn border col-12 d-flex justify-content-end" onclick="chatHistory.getChatId(${el.id}, ${index+1})">
                                     <div class="fw-lighter">${el.name}</div>
                                     <div class="fw-bold" style="margin-right: 5px;">${index+1}</div> 
                                 </button>

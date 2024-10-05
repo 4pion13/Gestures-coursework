@@ -1,37 +1,30 @@
 class LocalStorageUtil {
     constructor() {
-        this.keyChats = 'chats';
-        this.keyActiveChat = 'activeChat'
+        this.keyName = 'chatId';
     }
 
-    getChats(data){
-        const chatsLocalStorage = data;
-        if (chatsLocalStorage !== null) {
-        //     // let chatIdList = [];
-        //     // chatsLocalStorage.forEach(element => {
-        //     //   console.log(element.id);
-        //     //   chatIdList.push(element.id);
-        //     // });
-        //     return chatIdList;
-        //     //return productsLocalStorage;
+    getChatId(){
+        const productsLocalStorage = localStorage.getItem(this.keyName);
+        if (productsLocalStorage !== null) {
+            //console.log(JSON.parse(productsLocalStorage));
+            return JSON.parse(productsLocalStorage);
+            //return productsLocalStorage;
         }
-        return chatsLocalStorage;
+        return [];
     }
 
-    putProducts(id){
-        let chats = this.getChats();
-        //let pushProduct = false;
-        const index = chats.indexOf(id);
-        if (index === -1) {
-            chats.push(id);
-            //pushProduct = true;
-        } else {
-            chats.splice(index, 1);
-        }
-        localStorage.setItem(this.keyName, JSON.stringify(products));
+    putChatId(id){
+        let chatId = this.getChatId();
+        chatId.splice(0);
+        chatId.push(id);
+        // if (index === -1) {
+        //     chatId.push(id);
+        // } else {
+        //     chatId.splice(index, 1);
+        // }
+        localStorage.setItem(this.keyName, JSON.stringify(chatId));
         return {
-            pushProduct: pushProduct,
-            chats: chats,
+            chatId: chatId
         }
 
     }

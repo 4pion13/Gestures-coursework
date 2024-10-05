@@ -45,7 +45,9 @@ class Dialogue{
                         <div class="mb-0" style="margin-left: 5px;">${id}</div>
                     </div>
                     <div id='chat' class="dialogue" style = "overflow-y: scroll; height: 80%; width: 100%">
-                        <div id="dialogueElement"><div>
+                        <div id="dialogueElement">
+                            <div id="dialogue-history"></div>
+                        <div>
                     </div>
                     <div id="btnDialogue"><div>
                 </div>
