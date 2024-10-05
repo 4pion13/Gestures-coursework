@@ -37,7 +37,8 @@ class ChatModal{
                 return response.json();
             })
             .then(data => {
-                console.log('Success:', data);      
+                console.log('Success:', data); 
+                location.reload();     
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -59,7 +60,7 @@ class ChatModal{
         
                 <div class="vh-100 justify-content-center align-items-center modal modal-sheet position-absolute ${modalState}" tabindex="-1" role="dialog" id="modalSheet">
         <div class="modal-dialog p-3" role="document">
-            <div class="modal-content rounded-4 shadow p-3">
+            <div class="modal-content rounded-4 border-color-custom shadow p-3">
             <div class="d-flex flex-column">
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <label class="form-label mb-0">Название чата</label>

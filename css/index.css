@@ -12,7 +12,7 @@ body {
 
 
 .dialogue::-webkit-scrollbar {
-    width: 5px;               /* ширина scrollbar */
+    width: 5px;       
 }
 
 .dialogue::-webkit-scrollbar-thumb {
@@ -21,3 +21,8 @@ body {
     border: 0px solid rgba(229, 103, 23, 0.8);  /* padding вокруг плашки */
 }
 
+
+.scroll-left {
+    direction: rtl;
+    overflow:auto;
+  }
