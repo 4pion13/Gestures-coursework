@@ -7,11 +7,11 @@
     <link rel="icon" type="image/png" href="img/icons8-favicon-48.png">
     <title>Жесты</title>
 </head>
-<button id="btnSwitch" class="btn btn-dark" style="position: absolute; bottom: 0; right: 0; border: 2px solid black; margin: 20px;"><i class="fa-solid fa-paint-roller" style="color: #ffffff;"></i></button>
 <body class="bg-dark" id="mainWindows">
     <div id="spinner"></div>
-    <div id="modal-chat"></div>
-    <div style="justify-content: space-between;" class="z-2 container d-flex vh-100 dialogue-custom-container">
+    <div id="mobileHistory" class="w-100 h-100 chat-history-mobile-custom chatClose " style="margin-top: 35%; position: fixed;"></div>
+    <div id="modal-chat" style="z-index: 250;"></div>
+    <div style="justify-content: space-between; z-index: 230;" class="z-2 container d-flex vh-100 dialogue-custom-container">
         <div id="chat-history" class="p-2 chat-history-custom" style="width: 30%;"></div>
         <div id="dialogue" style="width: 70%; flex-direction: column;" class="d-flex dialogue-custom p-2"></div>
     </div>
@@ -23,8 +23,10 @@
     <!-- Chat History -->
     <script src="components/ChatHistory/ChatHistory.js" crossorigin="anonymous"></script>
     <script src="components/ChatHistory/ChatModal.js" crossorigin="anonymous"></script>
+    <script src="components/ChatHistory/ChatHistoryMobile.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="components/ChatHistory/ChatHistory.css">
     <link rel="stylesheet" href="components/ChatHistory/ChatModal.css">
+
 
     <!-- Dialogue -->
     <script src="components/Dialogue/Dialogue.js" crossorigin="anonymous"></script>
@@ -53,25 +55,5 @@
     <!-- run -->
     <script src="index.js"></script>
 
-    <script>
-        
-        document.getElementById('btnSwitch').addEventListener('click',()=>{
-            if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
-                document.documentElement.setAttribute('data-bs-theme','light')
-            }
-            else {
-                document.documentElement.setAttribute('data-bs-theme','dark')
-            }
-
-            var mainWindows = document.getElementById('mainWindows');
-            console.log(mainWindows.className)
-            if (mainWindows.className == 'bg-dark') {
-                mainWindows.className = 'bg-light'
-            }
-            else {
-                mainWindows.className = 'bg-dark'
-            }
-        })
-    </script>
 </body>
 </html>

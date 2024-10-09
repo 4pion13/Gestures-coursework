@@ -10,9 +10,30 @@
 }
 
 
+.chatClose{
+    display: none !important;
+    z-index: 1 !important;
+}
+
+.chat-history-border-top {
+    border-top: 2px solid rgba(229, 103, 23, 0.8);
+    border-radius: 10px 10px 0px 0px;
+}
+
 @media (max-width: 768px) {
     .chat-history-custom {
         display: none;
+    }
+
+}
+
+.chat-history-mobile-custom {
+    z-index: 1;
+}
+@media (min-width: 768px) {
+    .chat-history-mobile-custom {
+        display: none;
+        z-index: 250;
     }
 
 }

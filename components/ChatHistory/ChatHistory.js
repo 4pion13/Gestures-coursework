@@ -37,7 +37,7 @@ class ChatHistory {
             }, 1);
         }
 
-        render(loading){
+        render(loading, mobile){
             let htmlChat = '';
             
             if (loading) {
@@ -56,8 +56,8 @@ class ChatHistory {
 
             } else {
                 let htmlChats = '';
-                if (Array.isArray(CHATS.chat_history)) {
-                    CHATS.chat_history.forEach((el, index) => {
+                if (Array.isArray(CHATS)) {
+                    CHATS.forEach((el, index) => {
                         console.log(el.id, index+1);
                         htmlChats += `
                             <div class="mb-1 d-flex justify-content-center" style="padding-left: 5px; padding-right: 5px;">
@@ -87,13 +87,14 @@ class ChatHistory {
             }
             //<div type="button" onclick="chatHistory.requestChatHistory()">Кнопка<div></div>
 
-    
+
             const html = `
                 <div class = "h-100 w-100 bg-secondary-subtle chat-history chat-history-custom shadow" style="position: relative;">
                     ${htmlChat}           
                 </div>
-               
+                
             `;
+
             ROOT_CHAT_HISTORY.innerHTML = html;
         }
 
