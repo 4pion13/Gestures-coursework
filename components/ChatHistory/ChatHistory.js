@@ -60,8 +60,9 @@ class ChatHistory {
                     CHATS.chat_history.forEach((el, index) => {
                         console.log(el.id, index+1);
                         htmlChats += `
-                            <div class="mb-1" style="padding-left: 5px; padding-right: 5px;">
-                                <button type="button" class="btn border col-12 d-flex justify-content-end" onclick="chatHistory.getChatId(${el.id}, ${index+1})">
+                            <div class="mb-1 d-flex justify-content-center" style="padding-left: 5px; padding-right: 5px;">
+                                <button class="btn col-3 border" style="margin-left:5px;" onclick="chatModal.openModal(chatModal._modalDelete)"><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
+                                <button type="button" class="btn border col-8 d-flex justify-content-end" onclick="chatHistory.getChatId(${el.id}, ${index+1})">
                                     <div class="fw-lighter">${el.name}</div>
                                     <div class="fw-bold" style="margin-right: 5px;">${index+1}</div> 
                                 </button>
@@ -75,7 +76,7 @@ class ChatHistory {
                 htmlChat = `
                 <div class="d-flex justify-content-between align-items-center mb-2 p-3">
                     <h5>Чаты</h5>
-                    <button type="button" class="btn border" onclick="chatModal.openModal()"><i class="fa-brands fa-rocketchat fa-regular" style="color: #ffffff;"></i></button>
+                    <button type="button" class="btn border" onclick="chatModal.openModal(chatModal._modalCreate)"><i class="fa-brands fa-rocketchat fa-regular" style="color: #ffffff;"></i></button>
                 </div>
                 <div id='history' class="dialogue scroll-left" style = "height: 85%; width: 100%; padding-left: 2px;">
                     <div>
@@ -101,4 +102,5 @@ class ChatHistory {
 }
 
 const chatHistory = new ChatHistory();
+
 

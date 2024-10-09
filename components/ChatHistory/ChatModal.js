@@ -3,19 +3,24 @@ class ChatModal{
         this.modalStatus = 0;
         this.modalClass = 'modalClose';
         this.modalError = '<p class = "error mb-1 fw-light">Введите название чата</p>';
+        this.modalErrorDeleteChat = '<p class = "error mb-1 fw-light">Ошибка</p>';
+        this._modalDelete = 'modalDelete';
+        this._modalCreate = 'modalCreate';
+
     }
 
-    openModal(){
+    openModal(modalStatus){
         let openModalClass = 'd-flex';
         console.log('click', this.modalStatus)
         if (this.modalStatus === 1){
             openModalClass = this.modalClass;
-            this.render(openModalClass);
+            this.render(openModalClass, false, modalStatus);
             this.modalStatus = 0;
         } else if(this.modalStatus === 0) {
             this.modalStatus = 1;
-            this.render(openModalClass);
+            this.render(openModalClass, false, modalStatus);
         }
+        
     }
 
     createChat(){
@@ -49,12 +54,43 @@ class ChatModal{
         }
     }
 
-    render(modalState, modalClassError){
+    render(modalState, modalClassError, modalType){
         let modalError = '';
         if (modalClassError){
             modalError = modalClassError;
         }
 
+        let htmlInput = '';
+        if(modalType == this._modalDelete) {
+            htmlInput = `
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <label class="form-label mb-0" style="margin-right:50px;">Удалить чат</label>
+                    <button class="btn btn-dark border" style="padding:0px 5px 0px 5px;" onclick="chatModal.openModal()"><i class="fa-solid fa-xmark fa-regular mb-0" style="color: #ffffff;"></i></button>
+                </div>
+                ${modalError}
+                <button class="btn btn-dark border col-12" type="button" onclick = "chatModal.createChat()"><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
+            
+            `
+        } else if(modalType == this._modalCreate) {
+            htmlInput = `
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <label class="form-label mb-0">Название чата</label>
+                    <button class="btn btn-dark border" style="padding:0px 5px 0px 5px;" onclick="chatModal.openModal()"><i class="fa-solid fa-xmark fa-regular mb-0" style="color: #ffffff;"></i></button>
+                </div>
+                ${modalError}
+                <input type="text" id="newChat" class="form-control mb-2" required>
+                <button class="btn btn-dark border col-12" type="button" onclick = "chatModal.createChat()"><i class="fa-solid fa-floppy-disk" style="color: #ffffff;"></i></button>
+            
+            `
+        } else {
+            htmlInput = `
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <label class="form-label mb-0">Ошибка</label>
+                    <button class="btn btn-dark border" style="padding:0px 5px 0px 5px;" onclick="chatModal.openModal()"><i class="fa-solid fa-xmark fa-regular mb-0" style="color: #ffffff;"></i></button>
+                </div>
+                <p>Ошибочка</p>
+            `
+        }
 
         let html = `
         
@@ -62,13 +98,8 @@ class ChatModal{
         <div class="modal-dialog p-3" role="document">
             <div class="modal-content rounded-4 border-color-custom shadow p-3">
             <div class="d-flex flex-column">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <label class="form-label mb-0">Название чата</label>
-                                <button class="btn btn-dark border" style="padding:0px 5px 0px 5px;" onclick="chatModal.openModal()"><i class="fa-solid fa-xmark fa-regular mb-0" style="color: #ffffff;"></i></button>
-                            </div>
-                            ${modalError}
-                            <input type="text" id="newChat" class="form-control mb-2" required>
-                            <button class="btn btn-dark border col-12" type="button" onclick = "chatModal.createChat()"><i class="fa-solid fa-floppy-disk" style="color: #ffffff;"></i></button>
+                ${htmlInput}
+                            
                         </div>
             </div>
         </div>
