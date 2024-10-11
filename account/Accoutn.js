@@ -11,7 +11,7 @@ class Account {
         console.log(password, email)
         setTimeout(function(){
             console.log('Сработало')
-            window.location.replace("http://127.0.0.1:2000/app.html");
+            window.location.replace(`${window.location.origin}/app.html`);
         }, 1500);
         
 
