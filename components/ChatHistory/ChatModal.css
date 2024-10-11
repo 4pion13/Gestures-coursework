@@ -16,7 +16,7 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input {
 }
 
 .border-color-custom {
-    border-color: rgba(229, 103, 23, 0.8) !important;
+    border:2px solid rgba(229, 103, 23, 0.8) !important;
 }
 body.modal-open .background-container{
     -webkit-filter: blur(4px);

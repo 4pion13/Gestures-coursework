@@ -120,8 +120,8 @@ class ChatModal{
         let html = `
         
                 <div class="vh-100 justify-content-center align-items-center modal modal-sheet position-absolute ${modalState}" tabindex="-1" role="dialog" id="modalSheet">
-        <div class="modal-dialog p-3" role="document">
-            <div class="modal-content rounded-4 border-color-custom shadow p-3">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content rounded-4 shadow-sm p-3">
             <div class="d-flex flex-column">
                 ${htmlInput}
                             
