@@ -9,18 +9,43 @@ class ChatModal{
 
     }
 
-    openModal(modalStatus){
+    openModal(modalStatus, chatId){
         let openModalClass = 'd-flex';
         console.log('click', this.modalStatus)
         if (this.modalStatus === 1){
             openModalClass = this.modalClass;
-            this.render(openModalClass, false, modalStatus);
+            this.render(openModalClass, false, modalStatus, chatId);
             this.modalStatus = 0;
         } else if(this.modalStatus === 0) {
             this.modalStatus = 1;
-            this.render(openModalClass, false, modalStatus);
+            this.render(openModalClass, false, modalStatus, chatId);
         }
         
+    }
+
+
+    deleteChat(id){
+        console.log(id);
+        fetch('http://localhost:8000/delete-chat/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({id}),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data); 
+            location.reload();     
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
 
     createChat(){
@@ -54,7 +79,7 @@ class ChatModal{
         }
     }
 
-    render(modalState, modalClassError, modalType){
+    render(modalState, modalClassError, modalType, chatId){
         let modalError = '';
         if (modalClassError){
             modalError = modalClassError;
@@ -68,7 +93,7 @@ class ChatModal{
                     <button class="btn btn-dark border" style="padding:0px 5px 0px 5px;" onclick="chatModal.openModal()"><i class="fa-solid fa-xmark fa-regular mb-0" style="color: #ffffff;"></i></button>
                 </div>
                 ${modalError}
-                <button class="btn btn-dark border col-12" type="button" onclick = "chatModal.createChat()"><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
+                <button class="btn btn-dark border col-12" type="button" onclick = "chatModal.deleteChat(${chatId})"><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
             
             `
         } else if(modalType == this._modalCreate) {

@@ -69,7 +69,7 @@ class ChatHistoryMobile {
                 CHATS.forEach((el, index) => {
                     htmlChats += `
                         <div class="mb-1 d-flex justify-content-center" style="padding-left: 5px; padding-right: 5px;">
-                            <button class="btn col-3 border" style="margin-left:5px;" onclick="chatModal.openModal(chatModal._modalDelete)"><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
+                            <button class="btn col-3 border" style="margin-left:5px;" onclick="chatModal.openModal(chatModal._modalDelete, ${el.id})"><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
                             <button type="button" class="btn border col-8 d-flex justify-content-end" onclick="chatHistory.getChatId(${el.id}, ${index+1})">
                                 <div class="fw-lighter">${el.name}</div>
                                 <div class="fw-bold" style="margin-right: 5px;">${index+1}</div> 

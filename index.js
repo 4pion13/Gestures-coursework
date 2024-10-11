@@ -17,12 +17,12 @@ let CHATS = [];
 let CHAT_DATA = [];
 let main = 'http://localhost:8000/chat-history/';
 let test = 'utils/test.json'
-fetch(test)
+fetch(main)
     .then(res => res.json())
     .then(body => {
         console.log(body.chat_history);
-        //CHATS = body.chat_history;
-        CHATS = body;
+        CHATS = body.chat_history;
+        //CHATS = body;
         console.log(typeof(CHATS));
         setTimeout(function(){
             spinner.rootClear();
