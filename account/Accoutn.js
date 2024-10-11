@@ -10,7 +10,8 @@ class Account {
         this.render(false, true);
         console.log(password, email)
         setTimeout(function(){
-            console.log('Сработало')
+            console.log('Сработало');
+            console.log(window.location.origin);
             window.location.replace(`${window.location.origin}/app.html`);
         }, 1500);
         
