@@ -7,7 +7,13 @@ class Account {
     signUp(){
         let password = document.getElementById('signUpPassword').value;
         let email = document.getElementById('signUpEmail').value;
+        this.render(false, true);
         console.log(password, email)
+        setTimeout(function(){
+            console.log('Сработало')
+            window.location.replace("http://127.0.0.1:2000/app.html");
+        }, 1500);
+        
 
 
     }
