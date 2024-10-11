@@ -9,16 +9,17 @@ class ChatModal{
 
     }
 
-    openModal(modalStatus, chatId){
+    openModal(modalStatus, chatId, chatName){
         let openModalClass = 'd-flex';
         console.log('click', this.modalStatus)
         if (this.modalStatus === 1){
             openModalClass = this.modalClass;
-            this.render(openModalClass, false, modalStatus, chatId);
+            this.render(openModalClass, false, modalStatus, chatId, chatName);
             this.modalStatus = 0;
         } else if(this.modalStatus === 0) {
             this.modalStatus = 1;
-            this.render(openModalClass, false, modalStatus, chatId);
+            console.log(chatName);
+            this.render(openModalClass, false, modalStatus, chatId, chatName);
         }
         
     }
@@ -79,7 +80,7 @@ class ChatModal{
         }
     }
 
-    render(modalState, modalClassError, modalType, chatId){
+    render(modalState, modalClassError, modalType, chatId, chatName){
         let modalError = '';
         if (modalClassError){
             modalError = modalClassError;
@@ -89,7 +90,7 @@ class ChatModal{
         if(modalType == this._modalDelete) {
             htmlInput = `
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <label class="form-label mb-0" style="margin-right:50px;">Удалить чат</label>
+                    <label class="form-label mb-0" style="margin-right:50px;">Удалить чат - <span class="fw-bold">(${chatName})</span></label>
                     <button class="btn btn-dark border" style="padding:0px 5px 0px 5px;" onclick="chatModal.openModal()"><i class="fa-solid fa-xmark fa-regular mb-0" style="color: #ffffff;"></i></button>
                 </div>
                 ${modalError}
