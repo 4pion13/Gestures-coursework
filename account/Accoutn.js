@@ -12,7 +12,7 @@ class Account {
         setTimeout(function(){
             console.log('Сработало');
             console.log(window.location.origin);
-            window.location.replace(`${window.location.origin}/app.html`);
+            window.location.replace(`${window.location.href}/app.html`);
         }, 1500);
         
 
