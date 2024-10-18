@@ -6,12 +6,23 @@ class ChatModal{
         this.modalErrorDeleteChat = '<p class = "error mb-1 fw-light">Ошибка</p>';
         this._modalDelete = 'modalDelete';
         this._modalCreate = 'modalCreate';
+        this._modalError = 'modalError';
+        this._modalExit = 'modalExit';
 
+    }
+
+
+    accountPage(){
+        localStorage.removeItem(localStorageUtil.keyToken);
+        window.location.replace(`${window.location.origin}`);
     }
 
     openModal(modalStatus, chatId, chatName){
         let openModalClass = 'd-flex';
         console.log('click', this.modalStatus)
+        if (modalStatus === this._modalCreate){
+            document.getElementById('offcanvas-close').click();
+        }
         if (this.modalStatus === 1){
             openModalClass = this.modalClass;
             this.render(openModalClass, false, modalStatus, chatId, chatName);
@@ -104,9 +115,26 @@ class ChatModal{
                     <button class="btn btn-dark border" style="padding:0px 5px 0px 5px;" onclick="chatModal.openModal()"><i class="fa-solid fa-xmark fa-regular mb-0" style="color: #ffffff;"></i></button>
                 </div>
                 ${modalError}
-                <input type="text" id="newChat" class="form-control mb-2" required>
+                <input type="text" id="newChat" class="form-control mb-2" style="z-index:300;" required>
                 <button class="btn btn-dark border col-12" type="button" onclick = "chatModal.createChat()"><i class="fa-solid fa-floppy-disk" style="color: #ffffff;"></i></button>
             
+            `
+        } else if(modalType == this._modalError){
+            htmlInput = `
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <label class="form-label mb-0" style="margin:0px 30px 0px 30px">Непредвиденная ошибка</label>
+                </div>
+                ${modalError}
+                <button class="btn btn-dark border col-12" type="button" onclick="chatModal.accountPage()"><i class="fa-solid fa-arrow-rotate-right" style="color: #ffffff;"></i></button>
+            `
+        }else if(modalType == this._modalExit){
+            htmlInput = `
+                <div class="d-flex justify-content-between mb-2">
+                    <label class="form-label mb-0" style="margin:0px 40px 0px 0px">Выход</label>
+                    <button class="btn btn-dark border" style="padding:0px 5px 0px 5px;" onclick="chatModal.openModal()"><i class="fa-solid fa-xmark fa-regular mb-0" style="color: #ffffff;"></i></button>
+                </div>
+                ${modalError}
+                <button class="btn btn-dark border col-12" type="button" onclick="accout.logout()"><i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i></button>
             `
         } else {
             htmlInput = `

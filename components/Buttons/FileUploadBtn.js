@@ -43,10 +43,12 @@ class FileUploadBtn {
         this.processingStatus = 1;
         this.updateBtn();
         let chatId = localStorageUtil.getChatId()[0];
+        let bearer = 'Bearer ' + localStorageUtil.getToken();
         fetch('http://localhost:8000/process/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': bearer,
             },
             body: JSON.stringify({id, chatId}),
         })
@@ -78,9 +80,13 @@ class FileUploadBtn {
         formData.append('file', file);
         this.loadingStatus = 1;
         this.updateBtn();
+        let bearer = 'Bearer ' + localStorageUtil.getToken();
         fetch('http://localhost:8000/upload/', {
             method: 'POST',
             body: formData,
+            headers: {
+                'Authorization': bearer,
+            },
         })
         .then(response => {
             if (!response.ok) {

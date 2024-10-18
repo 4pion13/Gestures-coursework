@@ -30,6 +30,7 @@ class ChatHistoryMobile {
    
     getChatId(id, index){
         console.log(id, index);
+        document.getElementById('offcanvas-close').click();
         dialogue.render(true);
         chatHistoryMobile.render();
         this.render();
@@ -59,6 +60,11 @@ class ChatHistoryMobile {
             });
     }
 
+    testFunk(id, index) {
+        document.getElementById('offcanvas-close').click();
+        chatHistoryMobile.getChatId(id, index);
+    }
+
     render(activeStatus){
         console.log('Мобильная версия!!!!!!!!');
         let htmlChat = '';
@@ -68,9 +74,9 @@ class ChatHistoryMobile {
         if (Array.isArray(CHATS)) {
                 CHATS.forEach((el, index) => {
                     htmlChats += `
-                        <div class="mb-1 d-flex justify-content-center" style="padding-left: 5px; padding-right: 5px;">
-                            <button class="btn col-3 border" style="margin-left:5px;" onclick="chatModal.openModal(chatModal._modalDelete, ${el.id}, '${el.name}')"><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
-                            <button type="button" class="btn border col-8 d-flex justify-content-end" onclick="chatHistory.getChatId(${el.id}, ${index+1})">
+                        <div class="mb-1 d-flex justify-content-center">
+                            <button class="btn col-2 border" style="" onclick="chatModal.openModal(chatModal._modalDelete, ${el.id}, '${el.name}')"><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
+                            <button type="button" class="btn border col-10 d-flex justify-content-end" onclick="chatHistoryMobile.testFunk(${el.id}, ${index+1})">
                                 <div class="fw-lighter">${el.name}</div>
                                 <div class="fw-bold" style="margin-right: 5px;">:${index+1}</div> 
                             </button>
@@ -81,14 +87,12 @@ class ChatHistoryMobile {
 
         htmlChat = `
             <div class="d-flex justify-content-end align-items-center px-3 py-1">
-                <button class="btn btn-dark border" style="padding:0px 5px 0px 5px;" onclick="chatHistoryMobile.openChat()"><i class="fa-solid fa-xmark fa-regular mb-0" style="color: #ffffff;"></i></button>
             </div>
-            <div class="d-flex justify-content-between align-items-center mb-2 p-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5>Чаты</h5>
                 <button type="button" class="btn border" onclick="chatModal.openModal(chatModal._modalCreate)"><i class="fa-brands fa-rocketchat fa-regular" style="color: #ffffff;"></i></button>
             </div>
             <div id='history' class="dialogue scroll-left d-flex flex-column" style = "width: 100%; height:500px; padding-left: 2px; margin-bottom: 55px;">
-
                 ${htmlChats}
 
             </div>
@@ -107,7 +111,8 @@ class ChatHistoryMobile {
             </div>
            
         `;
-        ROOT_MOBILE_CHAT_HISTORY.innerHTML = html;
+        //ROOT_MOBILE_CHAT_HISTORY.innerHTML = html;
+        document.getElementById("offcanvas-body").innerHTML = htmlChat;
     }
 
 }

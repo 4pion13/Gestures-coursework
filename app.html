@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="ru" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +8,21 @@
     <title>Жесты</title>
 </head>
 <body class="bg-dark" id="mainWindows">
+    <div class="offcanvas offcanvas-end bg-secondary-subtle" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
+        <div class="offcanvas-header">
+            <button class="btn btn-dark border" onclick="chatModal.openModal(chatModal._modalExit)">Выход</button>
+            <button type="button" class="btn-close" id="offcanvas-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="Закрыть"></button>
+        </div>
+        <div class="offcanvas-body" id="offcanvas-body">
+        </div>
+    </div>
     <div id="spinner"></div>
     <div id="mobileHistory" class="w-100 h-100 chat-history-mobile-custom chatClose " style="margin-top: 35%; position: fixed;"></div>
     <div id="modal-chat" style="z-index: 250;"></div>
-    <div style="justify-content: space-between; z-index: 230;" class="z-2 container d-flex vh-100 dialogue-custom-container">
-        <div id="chat-history" class="p-2 chat-history-custom" style="width: 30%;"></div>
-        <div id="dialogue" style="width: 70%; flex-direction: column;" class="d-flex dialogue-custom custom-padding"></div>
+    <div style="justify-content: space-between; z-index: 230;" class="z-2 container d-flex dialogue-custom-container vh-100">
+        <div id="chat-history" class="chat-history-custom" style="width: 30%; padding-right: 10px;"></div>
+        <div id="dialogue" style="width: 70%; flex-direction: column;" class="d-flex dialogue-custom"></div>
     </div>
-
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

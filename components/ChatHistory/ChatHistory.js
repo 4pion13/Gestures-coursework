@@ -90,7 +90,8 @@ class ChatHistory {
 
             const html = `
                 <div class = "h-100 w-100 bg-secondary-subtle chat-history chat-history-custom shadow" style="position: relative;">
-                    ${htmlChat}           
+                    ${htmlChat}
+                    <button>Выход</button>           
                 </div>
                 
             `;

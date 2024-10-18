@@ -37,7 +37,7 @@ class Dialogue{
                     <div class = "w-100 h-100 bg-secondary-subtle chat-history shadow" style = "position:relative;">
                         <div class="d-flex justify-content-between align-items-center py-2 mb-0">
                             <h5 class="mb-0" style="margin: 0 auto">Диалог ${id}</h5>
-                            <button class="btn open-chat-btn nav-custom" style="position:absolute;" onclick="chatHistoryMobile.openChat()"><i class="fa-solid fa-list" style="color: #ffffff;"></i></button>
+                            <button class="btn open-chat-btn nav-custom" style="position:absolute;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive"><i class="fa-solid fa-list" style="color: #ffffff;"></i></button>
 
                         </div>
                         <div id='chat' class="dialogue" style = "overflow-y: scroll; height: 80%; width: 100%">
