@@ -23,40 +23,43 @@ class Account {
     }
 
     logout(){
-        fetch('http://localhost:8000/start/authenticate/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({email, password}),
-            })
-            .then(res => {
-                if(!res.ok) {
-                    //account.render(false,false, `Ошибка`);
-                    return res.text().then(text => { throw new Error(text) })
-                }
-                else {
-                    return res.json();
-               } 
-            }) 
-            .then(data => {
-                setTimeout(function(){
-                    console.log('Success:', data.access);
-                    localStorageUtil.putToken(data.access);
-                    //localStorage.removeItem(localStorageUtil.keyToken);
-                    //localStorageUtil.getToken();
-                    window.location.replace(`${window.location.href}app.html`);
-                }, 1500);
-            })
-            .catch((err) => {
-                setTimeout(function(){
-                    console.log(typeof(err.message))
-                    var result = err.message.slice(10,-2);
-                    account.render(false,false, result);
-                }, 1500);
-            });
-        }
+        localStorage.removeItem(localStorageUtil.keyToken);
+        window.location.reload();
+        // fetch('http://localhost:8000/start/authenticate/', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({email, password}),
+        //     })
+        //     .then(res => {
+        //         if(!res.ok) {
+        //             //account.render(false,false, `Ошибка`);
+        //             return res.text().then(text => { throw new Error(text) })
+        //         }
+        //         else {
+        //             return res.json();
+        //        } 
+        //     }) 
+        //     .then(data => {
+        //         setTimeout(function(){
+        //             console.log('Success:', data.access);
+        //             localStorageUtil.putToken(data.access);
+        //             //localStorage.removeItem(localStorageUtil.keyToken);
+        //             //localStorageUtil.getToken();
+        //             window.location.replace(`${window.location.href}app.html`);
+        //         }, 1500);
+        //     })
+        //     .catch((err) => {
+        //         setTimeout(function(){
+        //             console.log(typeof(err.message))
+        //             var result = err.message.slice(10,-2);
+        //             account.render(false,false, result);
+        //         }, 1500);
+        //     });
+        
     }
+
 
     signUp(){
         let password = document.getElementById('signUpPassword').value;

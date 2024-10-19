@@ -1,12 +1,12 @@
 class FileUploadBtn {
     constructor(){
         this.fileUploadBtnIn = `
-            <div class="align-items-end p-2" style = "position:absolute; bottom:0; width:100%;">
+            <div class="align-items-end p-2" style = "position:absolute; bottom:0; width:100%; padding-bottom: 20px !important;"">
                 <input class="form-control" type="file" id="formFile" accept="video/mp4" onchange="fileUploadBtn.sendingFile(this)">
             </div>
         `;
         this.loadingBtn = `
-            <div class="align-items-end p-2" style = "position:absolute; bottom:0; width:100%;">
+            <div class="align-items-end p-2" style = "position:absolute; bottom:0; width:100%; padding-bottom: 20px !important;"">
                 <button class="btn bg-secondary-subtle col-12" type="button" disabled>
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Загрузка видео
@@ -14,7 +14,7 @@ class FileUploadBtn {
             </div> 
         `;
         this.processingBtn = `
-            <div class="align-items-end p-2" style = "position:absolute; bottom:0; width:100%;">
+            <div class="align-items-end p-2" style = "position:absolute; bottom:0; width:100%; padding-bottom: 20px !important;"">
                 <button class="btn bg-secondary-subtle col-12" type="button" disabled>
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Обработка видео

@@ -74,13 +74,14 @@ class ChatHistoryMobile {
         if (Array.isArray(CHATS)) {
                 CHATS.forEach((el, index) => {
                     htmlChats += `
-                        <div class="mb-1 d-flex justify-content-center">
-                            <button class="btn col-2 border" style="" onclick="chatModal.openModal(chatModal._modalDelete, ${el.id}, '${el.name}')"><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
-                            <button type="button" class="btn border col-10 d-flex justify-content-end" onclick="chatHistoryMobile.testFunk(${el.id}, ${index+1})">
-                                <div class="fw-lighter">${el.name}</div>
-                                <div class="fw-bold" style="margin-right: 5px;">:${index+1}</div> 
+                        <div class="btn-group col-12 mb-2" role="group" aria-label="Простой пример">
+                            <button type="button" class="btn border d-flex justify-content-start col-8" onclick="chatHistoryMobile.testFunk(${el.id}, ${index+1})">
+                                <div class="fw-bold" style="margin-right: 5px;">${index+1}:</div> 
+                                <div class="fw-lighter text-custom" style="text-align: start;">${el.name}</div>
                             </button>
+                            <button class="btn border" style="" onclick="chatModal.openModal(chatModal._modalDelete, ${el.id}, '${el.name}')"><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
                         </div>
+                        
                     `;
                     console.log('Чат добавлен!')
         });
@@ -92,7 +93,7 @@ class ChatHistoryMobile {
                 <h5>Чаты</h5>
                 <button type="button" class="btn border" onclick="chatModal.openModal(chatModal._modalCreate)"><i class="fa-brands fa-rocketchat fa-regular" style="color: #ffffff;"></i></button>
             </div>
-            <div id='history' class="dialogue scroll-left d-flex flex-column" style = "width: 100%; height:500px; padding-left: 2px; margin-bottom: 55px;">
+            <div id='history' class="dialogue" style = "width: 100%; height:500px; padding-left: 2px; margin-bottom: 55px;">
                 ${htmlChats}
 
             </div>

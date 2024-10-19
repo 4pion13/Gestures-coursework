@@ -40,7 +40,7 @@ class Dialogue{
                             <button class="btn open-chat-btn nav-custom" style="position:absolute;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive"><i class="fa-solid fa-list" style="color: #ffffff;"></i></button>
 
                         </div>
-                        <div id='chat' class="dialogue" style = "overflow-y: scroll; height: 80%; width: 100%">
+                        <div id='chat' class="dialogue border-bottom border-top" style = "overflow-y: scroll; height: 80%; width: 100%">
                             <div id="dialogueElement">
                                 <div id="dialogue-history"></div>
                             <div>

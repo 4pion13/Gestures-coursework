@@ -2,7 +2,7 @@ class ChatModal{
     constructor(){
         this.modalStatus = 0;
         this.modalClass = 'modalClose';
-        this.modalError = '<p class = "error mb-1 fw-light">Введите название чата</p>';
+        this.modalErrorMessage = '<p class = "error mb-1 fw-light">Введите название чата</p>';
         this.modalErrorDeleteChat = '<p class = "error mb-1 fw-light">Ошибка</p>';
         this._modalDelete = 'modalDelete';
         this._modalCreate = 'modalCreate';
@@ -87,7 +87,7 @@ class ChatModal{
             });
             this.openModal(); 
         }else{
-            this.render('d-flex', this.modalError);
+            this.render('d-flex', this.modalErrorMessage, this._modalCreate);
         }
     }
 
@@ -134,7 +134,7 @@ class ChatModal{
                     <button class="btn btn-dark border" style="padding:0px 5px 0px 5px;" onclick="chatModal.openModal()"><i class="fa-solid fa-xmark fa-regular mb-0" style="color: #ffffff;"></i></button>
                 </div>
                 ${modalError}
-                <button class="btn btn-dark border col-12" type="button" onclick="accout.logout()"><i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i></button>
+                <button class="btn btn-dark border col-12" type="button" onclick="account.logout()"><i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i></button>
             `
         } else {
             htmlInput = `
@@ -150,7 +150,7 @@ class ChatModal{
         
                 <div class="vh-100 justify-content-center align-items-center modal modal-sheet position-absolute ${modalState}" tabindex="-1" role="dialog" id="modalSheet">
         <div class="modal-dialog" role="document">
-            <div class="modal-content rounded-4 shadow-sm p-3">
+            <div class="modal-content rounded-4 shadow-sm p-3" style="min-width: 350px;">
             <div class="d-flex flex-column">
                 ${htmlInput}
                             

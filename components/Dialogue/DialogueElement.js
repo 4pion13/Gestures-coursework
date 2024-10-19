@@ -52,7 +52,7 @@ class DialogueElement {
             });
             console.log(text);
             resultHtml = `
-            <div class="d-flex bg-dark justify-content-start p-3 col-5" style="border-radius: 0px 10px 10px 0px">
+            <div class="d-flex bg-dark justify-content-start p-3 col-5 border-bottom mb-2" style="border-radius: 0px 10px 10px 0px">
                 ${text}
             </div>
             `

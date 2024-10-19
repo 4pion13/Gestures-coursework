@@ -30,6 +30,7 @@ class ChatHistory {
         }
 
 
+
         chatScroll(){
             setTimeout(function(){
                 let chat = document.getElementById('history');
@@ -60,12 +61,12 @@ class ChatHistory {
                     CHATS.forEach((el, index) => {
                         console.log(el.id, index+1);
                         htmlChats += `
-                            <div class="mb-1 d-flex justify-content-center" style="padding-left: 5px; padding-right: 5px;">
-                                <button class="btn col-3 border" style="margin-left:5px;" onclick="chatModal.openModal(chatModal._modalDelete, ${el.id}, '${el.name}')"><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
-                                <button type="button" class="btn border col-8 d-flex justify-content-end" onclick="chatHistory.getChatId(${el.id}, ${index+1})">
-                                    <div class="fw-lighter">${el.name}</div>
-                                    <div class="fw-bold" style="margin-right: 5px;">:${index+1}</div> 
+                            <div class="btn-group col-12 mb-2" role="group" aria-label="Простой пример" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Подсказка внизу">
+                                <button type="button" id="btn-example" class="btn border d-flex justify-content-start col-8" onclick="chatHistoryMobile.testFunk(${el.id}, ${index+1})">
+                                    <div class="fw-bold" style="margin-right: 5px;">${index+1}:</div> 
+                                    <div class="fw-lighter text-custom" style="text-align: start;">${el.name}</div>
                                 </button>
+                                <button class="btn border" style="" onclick="chatModal.openModal(chatModal._modalDelete, ${el.id}, '${el.name}')"><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
                             </div>
                         `;
                         console.log('Чат добавлен!')
@@ -74,11 +75,11 @@ class ChatHistory {
                     console.error("CHATS is not an array:", CHATS);
                 }
                 htmlChat = `
-                <div class="d-flex justify-content-between align-items-center mb-2 p-3">
-                    <h5>Чаты</h5>
+                <div class="d-flex justify-content-between align-items-center mb-2 p-3 border-bottom">
+                    <button class="btn btn-dark border" onclick="chatModal.openModal(chatModal._modalExit)">Выход</button>
                     <button type="button" class="btn border" onclick="chatModal.openModal(chatModal._modalCreate)"><i class="fa-brands fa-rocketchat fa-regular" style="color: #ffffff;"></i></button>
                 </div>
-                <div id='history' class="dialogue scroll-left" style = "height: 85%; width: 100%; padding-left: 2px;">
+                <div id='history' class="dialogue p-3" style = "height: 85%; width: 100%; padding-left: 2px;">
                     <div>
                         ${htmlChats}
                     </div>
@@ -90,8 +91,7 @@ class ChatHistory {
 
             const html = `
                 <div class = "h-100 w-100 bg-secondary-subtle chat-history chat-history-custom shadow" style="position: relative;">
-                    ${htmlChat}
-                    <button>Выход</button>           
+                    ${htmlChat}       
                 </div>
                 
             `;
