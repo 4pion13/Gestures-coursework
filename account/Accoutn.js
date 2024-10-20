@@ -1,9 +1,9 @@
 class Account {
-    formValidation(){
+    formValidation(emailId, subButtonId){
         const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
-        const input = document.getElementById('signUpEmail');
-        const inputPas = document.getElementById('signUpPassword');
-        const subButton = document.getElementById('subButton');
+        const input = document.getElementById(emailId);
+        //const inputPas = document.getElementById('signUpPassword');
+        const subButton = document.getElementById(subButtonId);
         function isEmailValid(value) {
             return EMAIL_REGEXP.test(value);
         }
@@ -20,7 +20,9 @@ class Account {
 
         }
         input.addEventListener('input', onInput);
+        
     }
+
 
     logout(){
         localStorage.removeItem(localStorageUtil.keyToken);
@@ -103,37 +105,77 @@ class Account {
 
     registration(){
         let password = document.getElementById('floatingPassword').value;
-        let email = document.getElementById('floatingInput').value;
+        let passwordRepeat = document.getElementById('floatingPassword2').value;
+        let email = document.getElementById('emailRegInput').value;
         let username = document.getElementById('login').value;
-        this.render(false, true);
-        console.log(email, password)
-        fetch('http://localhost:8000/start/registration/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({email, password, username}),
-            })
-            .then(response => response.json()) 
-            .then(data => {
-                setTimeout(function(){
-                    console.log('Success:', data);
-                    account.render(false, false);
-                    account.formValidation();
-                }, 1500);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        console.log('USERNAME - ', username, password);
+        //password.value === '' || email.value === '' || 
+        if(username !== "" && password !== "" && email !== "" && passwordRepeat !== ""){
+            if(password !== passwordRepeat) {
+                account.render(true,false, false, '<p style="color:red;">Пароли не совпадают</p>');
+            } else {
+                console.log('Отправлен запрос!')
+                this.render(false, true);
+                console.log(email, password)
+                fetch('http://localhost:8000/start/registration/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({email, password, username}),
+                    })
+                    .then(res => {
+                        if(!res.ok) {
+                            //account.render(false,false, `Ошибка`);
+                            return res.text().then(text => { throw new Error(text) })
+                        }
+                        else {
+                            return res.json();
+                       } 
+                    }) 
+                    .then(data => {
+                        // setTimeout(function(){
+                        //     console.log('Success:', data.access);
+                        //     account.render(false,false, false, `<p class="mb-0">Вы зарегестрировали аккаунт</p>`)
+                        // }, 1500);
+                        setTimeout(function(){
+                            console.log('Success:', data.access);
+                            localStorageUtil.putToken(data.access);
+                            //localStorage.removeItem(localStorageUtil.keyToken);
+                            //localStorageUtil.getToken();
+                            window.location.replace(`${window.location.href}app.html`);
+                        }, 1500);
+                    })
+                    .catch((err) => {
+                        setTimeout(function(){
+                            console.log(typeof(err.message))
+                            var result = err.message.slice(10,-2);
+                            //account.render(false,false, result);
+                            account.render(true,false, false, `<p style="color:red;">${result}</p>`)
+                        }, 1500);
+                    });
+            }
+            
+        
+        } else { 
+            console.log('Сработало');
+            account.render(true,false, false, '<p style="color:red;">Заполните пустые поля</p>');
+        }
+           
     }
 
     renderSignUp(){
         account.render();
-        account.formValidation();
+        account.formValidation('signUpEmail', 'subButton');
     }
 
-    render(registration, loading, message){
+    render(registration, loading, message, alert){
         let htmlInner = '';
+
+        if(!alert){
+            alert = '';
+        }
+
         if(!registration) {
             htmlInner += `
                 <div class="modal-header p-3 pb-4 border-bottom-0">
@@ -150,6 +192,7 @@ class Account {
                         <input type="password" class="form-control rounded-3" id="signUpPassword" placeholder="Пароль">
                         <label for="signUpPassword">Пароль</label>
                         </div>
+                        ${alert}
                         <button type="button" class="btn btn-link p-0 mb-2" onclick="account.render(true)">Регистрация</button>
                         <button id='subButton' class="w-100 mb-2 btn btn-lg rounded-3 btn-primary btn-custom-color shadow" onclick="account.signUp()" disabled>Вход</button>
                     </form>
@@ -165,8 +208,8 @@ class Account {
                     <div class="modal-body p-3 pt-0">
                     <form class="">
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">Email</label>
+                            <input type="email" class="form-control rounded-3" id="emailRegInput" placeholder="name@example.com">
+                            <label for="emailRegInput">Email</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control rounded-3" id="login" placeholder="Roman">
@@ -180,7 +223,8 @@ class Account {
                             <input type="password" class="form-control rounded-3" id="floatingPassword2" placeholder="Пароль (повтор)">
                             <label for="floatingPassword2">Пароль (повтор)</label>
                         </div>
-                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary btn-custom-color shadow" onclick="account.registration()">Регистрация</button>
+                        ${alert}
+                        <button id="reg" class="w-100 mb-2 btn btn-lg rounded-3 btn-primary btn-custom-color shadow" onclick="account.registration()" disabled>Регистрация</button>
                     </form>
                 </div>
 
@@ -227,6 +271,10 @@ class Account {
         `
 
         ROOT_ACCOUNT.innerHTML = html;
+
+        if(registration){
+            account.formValidation('emailRegInput', 'reg');
+        }
     }
 }
 

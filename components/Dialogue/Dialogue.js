@@ -10,6 +10,8 @@ class Dialogue{
 
     render(loading, id){
         let html = '';
+        let openChatClass = '';
+        let startMessage = '';
         if (loading) {
             console.log('Загрузка чатов')
             html = `
@@ -27,8 +29,12 @@ class Dialogue{
         } else {
             if (!id) {
                 id = ''
+                openChatClass = '';
+                startMessage = '<p style="text-align: center; margin-left: 5px;" class="mb-0">Для перевода видео с жестового языка выберите чат.</p>'
             }else{
-                id = ` | ID: ${id}`
+                id = ` | ID: ${id}`;
+                openChatClass = 'border bg-body';
+                startMessage = '';
             }
             this.chatScroll
             console.log(fileUploadBtn.processingStatus)
@@ -40,7 +46,8 @@ class Dialogue{
                             <button class="btn open-chat-btn nav-custom" style="position:absolute;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive"><i class="fa-solid fa-list" style="color: #ffffff;"></i></button>
 
                         </div>
-                        <div id='chat' class="dialogue border-bottom border-top" style = "overflow-y: scroll; height: 80%; width: 100%">
+                        <div id='chat' class="dialogue ${openChatClass}" style = "overflow-y: scroll; height: 80%; width: 100%">
+                            ${startMessage}
                             <div id="dialogueElement">
                                 <div id="dialogue-history"></div>
                             <div>

@@ -19,8 +19,8 @@ class DialogueElement {
                                     <video src="${el.request}" style="max-width:200px;" controls></video>
                                 </div>
                             </div>
-                            <div class="d-flex bg-dark justify-content-start p-3 col-5" style="border-radius: 0px 10px 10px 0px">
-                                ${el.anser}
+                            <div class="d-flex bg-secondary-subtle justify-content-start p-3 col-6" style="border-radius: 0px 10px 10px 0px;">
+                                <p class="mb-0">${el.anser}</p>
                             </div>
                             <div class="d-flex justify-content-end p-3 fw-light">
                                 ${el.date}
@@ -51,9 +51,14 @@ class DialogueElement {
                 text += element + ' ';
             });
             console.log(text);
+            let currentDate = new Date();
+            let date = `${currentDate.getFullYear()}-${currentDate.getMonth()+1}-${currentDate.getDate()}`
             resultHtml = `
-            <div class="d-flex bg-dark justify-content-start p-3 col-5 border-bottom mb-2" style="border-radius: 0px 10px 10px 0px">
+            <div class="d-flex bg-secondary-subtle justify-content-start p-3 col-6" style="border-radius: 0px 10px 10px 0px">
                 ${text}
+            </div>
+            <div class="d-flex justify-content-end p-3 fw-light border-bottom">
+                ${date}
             </div>
             `
         } else {

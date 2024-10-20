@@ -75,11 +75,12 @@ class ChatHistory {
                     console.error("CHATS is not an array:", CHATS);
                 }
                 htmlChat = `
-                <div class="d-flex justify-content-between align-items-center mb-2 p-3 border-bottom">
+                <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
                     <button class="btn btn-dark border" onclick="chatModal.openModal(chatModal._modalExit)">Выход</button>
                     <button type="button" class="btn border" onclick="chatModal.openModal(chatModal._modalCreate)"><i class="fa-brands fa-rocketchat fa-regular" style="color: #ffffff;"></i></button>
                 </div>
                 <div id='history' class="dialogue p-3" style = "height: 85%; width: 100%; padding-left: 2px;">
+                    <h5 class="py-2 mb-0">Чаты</h5>
                     <div>
                         ${htmlChats}
                     </div>
