@@ -29,6 +29,7 @@ class ChatHistoryMobile {
 
    
     getChatId(id, index){
+        let bearer = 'Bearer ' + localStorageUtil.getToken();
         console.log(id, index);
         document.getElementById('offcanvas-close').click();
         dialogue.render(true);
@@ -37,6 +38,7 @@ class ChatHistoryMobile {
         fetch('http://localhost:8000/chat-data/', {
             method: 'POST',
             headers: {
+                'Authorization': bearer,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({id}),

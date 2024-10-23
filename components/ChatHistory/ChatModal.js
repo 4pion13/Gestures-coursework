@@ -41,12 +41,14 @@ class ChatModal{
         fetch('http://localhost:8000/delete-chat/', {
             method: 'POST',
             headers: {
+                'Authorization': 'Bearer ' + localStorageUtil.getToken(),
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({id}),
         })
         .then(response => {
             if (!response.ok) {
+                chatModal.openModal(chatModal._modalError);
                 throw new Error('Network response was not ok');
             }
             return response.json();
@@ -68,12 +70,14 @@ class ChatModal{
             fetch('http://localhost:8000/new-chat/', {
                 method: 'POST',
                 headers: {
+                    'Authorization': 'Bearer ' + localStorageUtil.getToken(),
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({data}),
             })
             .then(response => {
                 if (!response.ok) {
+                    chatModal.openModal(chatModal._modalError);
                     throw new Error('Network response was not ok');
                 }
                 return response.json();

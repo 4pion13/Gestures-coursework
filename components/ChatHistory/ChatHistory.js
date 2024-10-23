@@ -3,9 +3,11 @@ class ChatHistory {
         getChatId(id, index){
             console.log(id, index);
             dialogue.render(true);
+            let bearer = 'Bearer ' + localStorageUtil.getToken();
             fetch('http://localhost:8000/chat-data/', {
                 method: 'POST',
                 headers: {
+                    'Authorization': bearer,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({id}),

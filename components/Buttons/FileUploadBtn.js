@@ -54,6 +54,7 @@ class FileUploadBtn {
         })
         .then(response => {
             if (!response.ok) {
+                chatModal.openModal(chatModal._modalError);
                 throw new Error('Network response was not ok');
             }
             //console.log(response.json());
@@ -90,6 +91,7 @@ class FileUploadBtn {
         })
         .then(response => {
             if (!response.ok) {
+                chatModal.openModal(chatModal._modalError);
                 throw new Error('Network response was not ok');
             }
             return response.json();
@@ -99,6 +101,7 @@ class FileUploadBtn {
             var me = this;
             setTimeout(function(){
                 me.loadingStatus = 0;
+                me.processingStatus = 1;
                 me.updateBtn();
                 dialogueElement.render(data.file_url);
                 dialogue.chatScroll();
