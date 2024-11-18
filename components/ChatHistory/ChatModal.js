@@ -4,11 +4,12 @@ class ChatModal{
         this.modalClass = 'modalClose';
         this.modalErrorMessage = '<p class = "error mb-1 fw-light">Введите название чата</p>';
         this.modalErrorDeleteChat = '<p class = "error mb-1 fw-light">Ошибка</p>';
+        this.modalErrorReport = '<p class = "error mb-1 fw-light">Введите сообщение ошибки с которой вы столкнулись</p>';
         this._modalDelete = 'modalDelete';
         this._modalCreate = 'modalCreate';
         this._modalError = 'modalError';
         this._modalExit = 'modalExit';
-
+        this._modalReport = 'modalReport';
     }
 
 
@@ -17,7 +18,7 @@ class ChatModal{
         window.location.replace(`${window.location.origin}`);
     }
 
-    openModal(modalStatus, chatId, chatName){
+    openModal(modalStatus, chatId, chatName, answerId){
         let openModalClass = 'd-flex';
         console.log('click', this.modalStatus)
         if (modalStatus === this._modalCreate){
@@ -30,7 +31,11 @@ class ChatModal{
         } else if(this.modalStatus === 0) {
             this.modalStatus = 1;
             console.log(chatName);
-            this.render(openModalClass, false, modalStatus, chatId, chatName);
+            if(answerId){
+                this.render(openModalClass, false, modalStatus, chatId, chatName, answerId);
+            }else{
+                this.render(openModalClass, false, modalStatus, chatId, chatName);
+            }
         }
         
     }
@@ -95,7 +100,39 @@ class ChatModal{
         }
     }
 
-    render(modalState, modalClassError, modalType, chatId, chatName){
+
+    sendReport(answerId){
+        if(document.getElementById('reportArea').value === '' || document.getElementById('reportArea').value === ' ') {
+            chatModal.render('d-flex', this.modalErrorReport, chatModal._modalReport, false, false, answerId)
+        }else{
+            console.log("ID сообщения - ", answerId);
+            let message = document.getElementById('reportArea').value;
+            fetch('http://localhost:8000/report-data/', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorageUtil.getToken(),
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({answerId, message}),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    chatModal.openModal(chatModal._modalError);
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data); 
+                chatModal.openModal();    
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    }
+
+    render(modalState, modalClassError, modalType, chatId, chatName, answerId){
         let modalError = '';
         if (modalClassError){
             modalError = modalClassError;
@@ -110,7 +147,6 @@ class ChatModal{
                 </div>
                 ${modalError}
                 <button class="btn btn-dark border col-12" type="button" onclick = "chatModal.deleteChat(${chatId})"><i class="fa-regular fa-trash-can" style="color: #ffffff;"></i></button>
-            
             `
         } else if(modalType == this._modalCreate) {
             htmlInput = `
@@ -121,7 +157,6 @@ class ChatModal{
                 ${modalError}
                 <input type="text" id="newChat" class="form-control mb-2" style="z-index:300;" required>
                 <button class="btn btn-dark border col-12" type="button" onclick = "chatModal.createChat()"><i class="fa-solid fa-floppy-disk" style="color: #ffffff;"></i></button>
-            
             `
         } else if(modalType == this._modalError){
             htmlInput = `
@@ -139,6 +174,19 @@ class ChatModal{
                 </div>
                 ${modalError}
                 <button class="btn btn-dark border col-12" type="button" onclick="account.logout()"><i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i></button>
+            `
+        }else if(modalType == this._modalReport){
+            htmlInput = `
+                <div class="d-flex justify-content-between mb-2">
+                    <label class="form-label mb-0" style="margin:0px 40px 0px 0px">Сообщение об ошибке</label>
+                    <button class="btn btn-dark border" style="padding:0px 5px 0px 5px;" onclick="chatModal.openModal()"><i class="fa-solid fa-xmark fa-regular mb-0" style="color: #ffffff;"></i></button>
+                </div>
+                <div class="mb-3">
+                    <label for="reportArea" class="form-label">Опишите ошибку с которой вы столкнулись при получении перевода видео</label>
+                    <textarea class="form-control" id="reportArea" rows="3"></textarea>
+                </div>
+                ${modalError}
+                <button class="btn btn-dark border col-12" type="button" onclick="chatModal.sendReport(${answerId})"><i class="fa-regular fa-paper-plane" style="color: #ffffff;"></i></button>
             `
         } else {
             htmlInput = `

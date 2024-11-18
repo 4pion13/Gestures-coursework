@@ -5,3 +5,4 @@ const ROOT_MODAL_CHAT = document.getElementById('modal-chat');
 const ROOT_SPINNER = document.getElementById('spinner');
 const ROOT_MOBILE_CHAT_HISTORY = document.getElementById('mobileHistory');
 const ROOT_ACCOUNT = document.getElementById('account');
+const ROOT_REPORT = document.getElementById('report');
