@@ -1,25 +1,10 @@
-function render(){
-    chatHistory.render(false);
-    dialogue.render();
-    chatHistoryMobile.render();
-};
-
-
-function loading(){
-    chatHistory.render(true);
-    dialogue.render(true);
-}
-
-loading();
-let CHATS = [];
-let CHAT_DATA = [];
-//spinner.render();
+let REPORT = [];
 
 console.log(localStorageUtil.getToken())
 if (localStorageUtil.getToken().length == 0){
     window.location.replace(`${window.location.origin}`);
 } else {
-    let main = 'http://localhost:8000/chat-history/';
+    let main = 'http://localhost:8000/chat-report/';
     let test = 'utils/test.json'
     let bearer = 'Bearer ' + localStorageUtil.getToken();
     fetch(main, {
@@ -46,15 +31,9 @@ if (localStorageUtil.getToken().length == 0){
 
         .then(body => {
             //console.log(response);
-            console.log(body);
-            console.log(body.chat_history);
-            CHATS = body.chat_history;
-            console.log(typeof(CHATS));
-            setTimeout(function(){
-                spinner.rootClear();
-                render();
-                chatHistory.chatScroll();
-            }, 1500);
+            REPORT = body.chat_report;
+            console.log(REPORT);
+            report.render();
             }
         // }
         )
@@ -63,4 +42,3 @@ if (localStorageUtil.getToken().length == 0){
         })
 
 }
-

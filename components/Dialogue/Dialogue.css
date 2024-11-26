@@ -10,6 +10,18 @@
 }
 
 
+
+.custom-padding {
+    padding: .5rem !important;
+}
+
+@media (max-width: 768px) {
+    .custom-padding {
+        padding: 0px !important;
+    }
+}
+
+
 @media (max-width: 768px) {
     .dialogue-custom-container {
         display: block;

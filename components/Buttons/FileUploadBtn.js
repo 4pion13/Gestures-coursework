@@ -1,12 +1,12 @@
 class FileUploadBtn {
     constructor(){
         this.fileUploadBtnIn = `
-            <div class="align-items-end p-2" style = "position:absolute; bottom:0; width:100%;">
+            <div class="align-items-end p-2" style = "position:absolute; bottom:0; width:100%; padding-bottom: 20px !important;"">
                 <input class="form-control" type="file" id="formFile" accept="video/mp4" onchange="fileUploadBtn.sendingFile(this)">
             </div>
         `;
         this.loadingBtn = `
-            <div class="align-items-end p-2" style = "position:absolute; bottom:0; width:100%;">
+            <div class="align-items-end p-2" style = "position:absolute; bottom:0; width:100%; padding-bottom: 20px !important;"">
                 <button class="btn bg-secondary-subtle col-12" type="button" disabled>
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Загрузка видео
@@ -14,7 +14,7 @@ class FileUploadBtn {
             </div> 
         `;
         this.processingBtn = `
-            <div class="align-items-end p-2" style = "position:absolute; bottom:0; width:100%;">
+            <div class="align-items-end p-2" style = "position:absolute; bottom:0; width:100%; padding-bottom: 20px !important;"">
                 <button class="btn bg-secondary-subtle col-12" type="button" disabled>
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Обработка видео
@@ -43,15 +43,18 @@ class FileUploadBtn {
         this.processingStatus = 1;
         this.updateBtn();
         let chatId = localStorageUtil.getChatId()[0];
+        let bearer = 'Bearer ' + localStorageUtil.getToken();
         fetch('http://localhost:8000/process/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': bearer,
             },
             body: JSON.stringify({id, chatId}),
         })
         .then(response => {
             if (!response.ok) {
+                chatModal.openModal(chatModal._modalError);
                 throw new Error('Network response was not ok');
             }
             //console.log(response.json());
@@ -78,12 +81,17 @@ class FileUploadBtn {
         formData.append('file', file);
         this.loadingStatus = 1;
         this.updateBtn();
+        let bearer = 'Bearer ' + localStorageUtil.getToken();
         fetch('http://localhost:8000/upload/', {
             method: 'POST',
             body: formData,
+            headers: {
+                'Authorization': bearer,
+            },
         })
         .then(response => {
             if (!response.ok) {
+                chatModal.openModal(chatModal._modalError);
                 throw new Error('Network response was not ok');
             }
             return response.json();
@@ -93,6 +101,7 @@ class FileUploadBtn {
             var me = this;
             setTimeout(function(){
                 me.loadingStatus = 0;
+                me.processingStatus = 1;
                 me.updateBtn();
                 dialogueElement.render(data.file_url);
                 dialogue.chatScroll();
